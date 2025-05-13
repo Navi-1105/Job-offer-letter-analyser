@@ -17,26 +17,31 @@ def extract_text(file_path):
 
 # Function to extract salary information
 def extract_salary(text):
-    # Common salary formats: $60,000, 60000 USD, $30/hr
-    salary_pattern = r'\$\s?\d{2,3}(?:,\d{3})?(?:\s?(?:USD|usd))?|\d{2,3}(?:,\d{3})?\s?(?:USD|usd)?(?:\s?\/hr)?'
+    salary_pattern = r'(?i)\b(?:INR|Rs\.?|₹|\$|USD)?\s?[\d,]{4,7}(?:\s?(?:per month|monthly|\/hr|hour|stipend))?\b'
     matches = re.findall(salary_pattern, text)
-    return matches
+    return [match.strip() for match in matches if match.strip()]
+
 
 # Function to extract benefits like health insurance, PTO, etc.
+
 def extract_benefits(text):
-    benefits_keywords = [
-        "health insurance", "401(k)", "paid time off", "flexible hours",
-        "remote work", "dental", "vision", "gym membership", "parental leave"
-    ]
-    found = [b for b in benefits_keywords if b.lower() in text.lower()]
+    benefit_keywords = [
+    "health insurance", "401(k)", "paid time off", "paid leave", "flexible hours",
+    "remote work", "dental", "vision", "gym membership", "parental leave",
+    "medical coverage", "gratuity", "provident fund", "employee assistance"
+    "life insurance", "disability insurance", "tuition reimbursement", "wellness stipend",
+    "childcare assistance", "commuter benefits", "travel allowance", "sabbatical leave"]
+    found = [b for b in benefit_keywords if b.lower() in text.lower()]
     return found
 
 # Function to extract perks like stock options, free snacks, etc.
 def extract_perks(text):
     perk_keywords = [
-        "free snacks", "stock options", "company retreats", "training budget",
-        "pet-friendly", "performance bonus", "equipment allowance"
-    ]
+    "free snacks", "stock options", "company retreats", "training budget",
+    "pet-friendly", "performance bonus", "equipment allowance", "signing bonus",
+    "learning budget", "internet reimbursement", "wellness programs", "free meals"
+]
+
     found = [p for p in perk_keywords if p.lower() in text.lower()]
     return found
 
