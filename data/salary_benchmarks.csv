@@ -1,0 +1,21 @@
+Job Role,Industry,Location,Min Salary,Max Salary
+Software Engineer,Technology,USA,80000,120000
+Data Scientist,Technology,USA,75000,115000
+Product Manager,Technology,USA,90000,130000
+HR Manager,Healthcare,USA,60000,95000
+Marketing Director,Marketing,USA,85000,120000
+Software Engineer,Technology,UK,60000,90000
+Data Scientist,Technology,UK,65000,95000
+Product Manager,Technology,UK,70000,105000
+HR Manager,Healthcare,UK,50000,85000
+Marketing Director,Marketing,UK,70000,105000
+Software Engineer,Technology,India,10000,30000
+Data Scientist,Technology,India,12000,35000
+Product Manager,Technology,India,15000,40000
+HR Manager,Healthcare,India,8000,25000
+Marketing Director,Marketing,India,10000,35000
+Software Engineer,Technology,Canada,70000,100000
+Data Scientist,Technology,Canada,65000,95000
+Product Manager,Technology,Canada,75000,110000
+HR Manager,Healthcare,Canada,55000,90000
+Marketing Director,Marketing,Canada,75000,110000

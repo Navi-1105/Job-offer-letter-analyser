@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Offer Analyzer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="hero">
+    <div class="text-section">
+      <h1>Welcome to <span>Job Analyzer</span></h1>
+      <h2>Let’s decode your offer letter.</h2>
+      <p>We analyze job letters to extract salary, benefits, and perks using AI.</p>
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="offer_letter">Upload Offer Letter (PDF, DOCX, TXT):</label><br>
+        <input type="file" id="offer_letter" name="offer_letter" required>
+        <button type="submit">Analyze Letter</button>
+      </form>
+    </div>
+    <div class="image-section">
+      <img src="{{ url_for('static', filename='hero.png') }}" alt="Illustration of job analysis process">
+    </div>
+  </div>
+</body>
+</html>
