@@ -12,15 +12,64 @@
       <h1>Welcome to <span>Job Analyzer</span></h1>
       <h2>Let’s decode your offer letter.</h2>
       <p>We analyze job letters to extract salary, benefits, and perks using AI.</p>
-      <form action="/upload" method="post" enctype="multipart/form-data">
-        <label for="offer_letter">Upload Offer Letter (PDF, DOCX, TXT):</label><br>
-        <input type="file" id="offer_letter" name="offer_letter" required>
+
+      {% if error %}
+        <p style="color: red; font-weight: bold;">{{ error }}</p>
+      {% endif %}
+
+      <form id="uploadForm" action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+        <label for="offer_letter">Upload Offer Letter(s) (PDF, DOCX, TXT):</label><br>
+        <input type="file" id="offer_letter" name="offer_letters" multiple accept=".pdf,.docx,.txt" required>
+        <div id="file-names" style="margin-top: 10px; font-style: italic;"></div>
+        <div id="file-error" style="color: red; margin-top: 5px;"></div>
         <button type="submit">Analyze Letter</button>
       </form>
     </div>
+
     <div class="image-section">
       <img src="{{ url_for('static', filename='hero.png') }}" alt="Illustration of job analysis process">
     </div>
   </div>
+
+  <script>
+    const fileInput = document.getElementById('offer_letter');
+    const fileNamesDiv = document.getElementById('file-names');
+    const fileErrorDiv = document.getElementById('file-error');
+    const form = document.getElementById('uploadForm');
+
+    fileInput.addEventListener('change', () => {
+      fileNamesDiv.innerHTML = '';
+      fileErrorDiv.innerHTML = '';
+      const files = fileInput.files;
+      const allowedExtensions = ['pdf', 'docx', 'txt'];
+      let error = false;
+
+      for (const file of files) {
+        const ext = file.name.split('.').pop().toLowerCase();
+        if (!allowedExtensions.includes(ext)) {
+          error = true;
+          break;
+        }
+      }
+
+      if (files.length > 0) {
+        const names = Array.from(files).map(f => f.name).join(', ');
+        fileNamesDiv.textContent = "Selected file(s): " + names;
+      }
+
+      if (error) {
+        fileErrorDiv.textContent = "❌ Only .pdf, .docx, and .txt files are allowed.";
+        fileInput.value = ""; // Reset file input
+        fileNamesDiv.textContent = "";
+      }
+    });
+
+    form.addEventListener('submit', (e) => {
+      if (fileInput.files.length === 0) {
+        fileErrorDiv.textContent = "❌ Please select at least one file.";
+        e.preventDefault();
+      }
+    });
+  </script>
 </body>
 </html>
